@@ -1,7 +1,66 @@
-<h2>Lista de barrios</h2>
-<ul>
-    {% for barrio in barrios %}
-        <li>{{ barrio.nombre }} - Parroquia: {{ barrio.parroquia.nombre }}</li>
-    {% endfor %}
-</ul>
-<p><a href="{% url 'index' %}">Volver al inicio</a></p>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de barrios</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #999;
+            padding: 8px 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h2>Lista de Barrios</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Viviendas</th>
+                <th>Parques</th>
+                <th>Edificios</th>
+                <th>Parroquia</th>
+                <th>Ubicación</th>
+                <th>Tipo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for barrio in barrios %}
+                <tr>
+                    <td>{{ barrio.nombre }}</td>
+                    <td>{{ barrio.numero_viviendas }}</td>
+                    <td>{{ barrio.numero_parques }}</td>
+                    <td>{{ barrio.numero_edificios_residenciales }}</td>
+                    <td>{{ barrio.parroquia.nombre }}</td>
+                    <td>{{ barrio.parroquia.ubicacion }}</td>
+                    <td>{{ barrio.parroquia.tipo }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{% url 'index' %}">Volver al inicio</a>
+</body>
+</html>

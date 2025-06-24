@@ -1,10 +1,70 @@
-<h2>Parroquias y sus barrios</h2>
-{% for parroquia in parroquias %}
-    <h3>{{ parroquia.nombre }}</h3>
-    <ul>
-        {% for barrio in parroquia.barrio_set.all %}
-            <li>{{ barrio.nombre }}</li>
-        {% endfor %}
-    </ul>
-{% endfor %}
-<p><a href="{% url 'index' %}">Volver al inicio</a></p>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Parroquias y sus Barrios</title>
+    <style>
+        .parroquia {
+            margin-bottom: 30px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        .parroquia h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+
+        .info {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h2>Parroquias y sus barrios</h2>
+
+    {% for parroquia in parroquias %}
+        <div class="parroquia">
+            <h3>{{ parroquia.nombre }}</h3>
+            <div class="info">
+                Ubicación: <strong>{{ parroquia.ubicacion|capfirst }}</strong> |
+                Tipo: <strong>{{ parroquia.tipo|capfirst }}</strong>
+            </div>
+            {% if parroquia.barrio_set.all %}
+                <ul>
+                    {% for barrio in parroquia.barrio_set.all %}
+                        <li>
+                            {{ barrio.nombre }} ({{ barrio.numero_viviendas }} viviendas, {{ barrio.numero_parques }} parques, {{ barrio.numero_edificios_residenciales }} edificios)
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p><em>No hay barrios registrados en esta parroquia.</em></p>
+            {% endif %}
+        </div>
+    {% endfor %}
+
+    <a href="{% url 'index' %}">Volver al inicio</a>
+</body>
+</html>
