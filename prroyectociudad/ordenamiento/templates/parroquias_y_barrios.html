@@ -1,0 +1,10 @@
+<h2>Parroquias y sus barrios</h2>
+{% for parroquia in parroquias %}
+    <h3>{{ parroquia.nombre }}</h3>
+    <ul>
+        {% for barrio in parroquia.barrio_set.all %}
+            <li>{{ barrio.nombre }}</li>
+        {% endfor %}
+    </ul>
+{% endfor %}
+<p><a href="{% url 'index' %}">Volver al inicio</a></p>

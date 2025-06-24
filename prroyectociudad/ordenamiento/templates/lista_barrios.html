@@ -1,0 +1,7 @@
+<h2>Lista de barrios</h2>
+<ul>
+    {% for barrio in barrios %}
+        <li>{{ barrio.nombre }} - Parroquia: {{ barrio.parroquia.nombre }}</li>
+    {% endfor %}
+</ul>
+<p><a href="{% url 'index' %}">Volver al inicio</a></p>
